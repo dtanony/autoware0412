@@ -1,22 +1,25 @@
 ## Extended Autoware v0.41.2
-This is a forked version of Autoware, extened from [Autoware v0.41.2](https://github.com/autowarefoundation/autoware/releases/tag/0.41.2) with the following changes:
+This repository is a fork of Autoware, extended from [Autoware v0.41.2](https://github.com/autowarefoundation/autoware/releases/tag/0.41.2) with the following modifications:
 
-- Add a new ROS 2 service interface that enables ROS clients to issue service requests to trigger AEB activation.
-The modified code is in [src/universe/autoware.universe/control/autoware_autonomous_emergency_braking](src/universe/autoware.universe/control/autoware_autonomous_emergency_braking) package, in particular, [src/universe/autoware.universe/control/autoware_autonomous_emergency_braking/src/node.cpp](src/universe/autoware.universe/control/autoware_autonomous_emergency_braking/src/node.cpp) file.
-Readers who curious about the changes made can compare with the original version from [Autoware Universe repo](https://github.com/autowarefoundation/autoware_universe/tree/main/control/autoware_autonomous_emergency_braking).
+- **New AEB service interface**.
+Added a ROS 2 service interface that allows ROS clients to trigger Autonomous Emergency Braking (AEB).
+The modified implementation can be found in the [src/universe/autoware.universe/control/autoware_autonomous_emergency_braking](src/universe/autoware.universe/control/autoware_autonomous_emergency_braking) package, particularly in the [src/universe/autoware.universe/control/autoware_autonomous_emergency_braking/src/node.cpp](src/universe/autoware.universe/control/autoware_autonomous_emergency_braking/src/node.cpp) file.
+For comparison, the original implementation is available in the [Autoware Universe repo](https://github.com/autowarefoundation/autoware_universe/tree/main/control/autoware_autonomous_emergency_braking).
 
-- Add [src/aw_monitor package](src/aw_monitor/) to support the implementation of AW-Runtime-Monitor. New msg and srv files are defined in the package to define our custom message formats.
+- **New `aw_monitor` package**.
+Added the [src/aw_monitor package](src/aw_monitor/) package to support the implementation of AW-Runtime-Monitor. This package introduces new `msg` and `srv` definitions for custom message formats.
 
-- Modify default parameter configuration for AD in [src/launcher/autoware_launch/autoware_launch/config/planning/scenario_planning/common/common.param.yaml](src/launcher/autoware_launch/autoware_launch/config/planning/scenario_planning/common/common.param.yaml).
-The default configuration ([here](https://github.com/autowarefoundation/autoware_launch/blob/main/autoware_launch/config/planning/scenario_planning/common/common.param.yaml)) for deceleration and jerk are 2.5 m/s2 and 1.5 m/s3, which are too small.
-So increase these settings to 8.33 m/s2 (0.85 G) and 83.3 m/s3, following the JAMA standard.
+- **Modified default planning parameters**. 
+Updated the default parameter configuration for autonomous driving in [src/launcher/autoware_launch/autoware_launch/config/planning/scenario_planning/common/common.param.yaml](src/launcher/autoware_launch/autoware_launch/config/planning/scenario_planning/common/common.param.yaml).
+In the original configuration ([reference](https://github.com/autowarefoundation/autoware_launch/blob/main/autoware_launch/config/planning/scenario_planning/common/common.param.yaml)), the default deceleration and jerk limits are set to 2.5 m/s2 and 1.5 m/s3, which are too small.
+We increase them to 8.33 m/s2 (0.85 G) and 83.3 m/s3, following the JAMA standard.
 
 
 ### Installation
-The hardware requirements is available here:
+The hardware requirements are listed here:
 https://autowarefoundation.github.io/AWSIM-Labs/main/GettingStarted/QuickStartDemo/#pc-specs
 
-Follow the procedure below, which is copied from https://autowarefoundation.github.io/AWSIM-Labs/main/GettingStarted/QuickStartDemo and https://autowarefoundation.github.io/autoware-documentation/main/installation/autoware/source-installation/,  to install and launch Autoware.
+To install and launch this extended Autoware version, follow the procedure below (adapted from https://autowarefoundation.github.io/AWSIM-Labs/main/GettingStarted/QuickStartDemo and https://autowarefoundation.github.io/autoware-documentation/main/installation/autoware/source-installation/).
 
 1. Download `map files (pcd, osm)` from [here](https://github.com/tier4/AWSIM/releases/download/v1.1.0/nishishinjuku_autoware_map.zip) and unzip the file.
 
@@ -56,4 +59,4 @@ ros2 launch autoware_launch e2e_simulator.launch.xml vehicle_model:=awsim_labs_v
 ros2 launch autoware_launch e2e_simulator.launch.xml vehicle_model:=awsim_labs_vehicle sensor_model:=awsim_labs_sensor_kit map_path:=/home/your_username/autoware_map/nishishinjuku_autoware_map launch_vehicle_interface:=true
 ```
 
-If there is any build issue, refer to [Troubleshooting](https://autowarefoundation.github.io/autoware-documentation/main/support/troubleshooting/#build-issues).
+If any build issues occur, refer to the [Troubleshooting guide](https://autowarefoundation.github.io/autoware-documentation/main/support/troubleshooting/#build-issues).
