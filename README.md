@@ -19,6 +19,11 @@ We increase them to 8.33 m/s2 (0.85 G) and 83.3 m/s3, following the JAMA standar
 The hardware requirements are listed here:
 https://autowarefoundation.github.io/AWSIM-Labs/main/GettingStarted/QuickStartDemo/#pc-specs
 
+To run an end-to-end Autoware simulation with the [AWSIM-Labs simulator](https://github.com/dtanony/AWSIM-Labs), a PC equipped with a GPU is required.
+Because of the specific GPU driver and CUDA dependencies, a pre-built binary release of Autoware is not available for this setup.
+Therefore, if you want to run an end-to-end simulation with AWSIM-Labs, the only option is to build Autoware from source.
+To install AWSIM-Labs, follow the instructions on its [repository](https://github.com/dtanony/AWSIM-Labs).
+
 To install and launch this extended Autoware version, follow the procedure below (adapted from https://autowarefoundation.github.io/AWSIM-Labs/main/GettingStarted/QuickStartDemo and https://autowarefoundation.github.io/autoware-documentation/main/installation/autoware/source-installation/).
 
 1. Download `map files (pcd, osm)` from [here](https://github.com/tier4/AWSIM/releases/download/v1.1.0/nishishinjuku_autoware_map.zip) and unzip the file.
@@ -58,5 +63,7 @@ ros2 launch autoware_launch e2e_simulator.launch.xml vehicle_model:=awsim_labs_v
 # Example:
 ros2 launch autoware_launch e2e_simulator.launch.xml vehicle_model:=awsim_labs_vehicle sensor_model:=awsim_labs_sensor_kit map_path:=/home/your_username/autoware_map/nishishinjuku_autoware_map launch_vehicle_interface:=true
 ```
+The screen looks like this (after connected with AWSIM-Labs)
+![Autoware screen](screenshot.png)
 
 If any build issues occur, refer to the [Troubleshooting guide](https://autowarefoundation.github.io/autoware-documentation/main/support/troubleshooting/#build-issues).
