@@ -25,6 +25,7 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/VehicleSize.msg"
   "msg/GroundtruthSize.msg"
   "msg/ResponseStatus.msg"
+  "srv/GroundtruthSize.srv"
   "srv/GroundtruthKinematic.srv"
   "srv/ExecutionState.srv"
   "srv/DynamicControl.srv"  
